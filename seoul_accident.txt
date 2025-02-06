@@ -1,0 +1,17 @@
+import pandas as pd
+
+years = list(range(2014,2024))
+cols = []
+accident = []
+
+for i in range(len(years)):
+    file = f'./도로교통공단_시도 시군구별 교통사고({years[i]}).csv'
+    df = pd.read_csv(file, encoding = 'cp949')
+    df_temp = df.head(25)
+    accident.append(list(df_temp['사고건수'].values))
+
+cols = df_temp['시군구']
+
+df_final = pd.DataFrame(accident, columns=cols, index=years)
+
+df_final
